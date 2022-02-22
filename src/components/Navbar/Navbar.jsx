@@ -21,6 +21,7 @@ const pages = [
   { name: 'PRODUCTS', link: '/products', id: 1 },
   { name: 'ABOUT US', link: '/aboutus', id: 2 },
   { name: 'CONTACTS', link: '*', id: 3 },
+  { name: 'ADMIN PANEL', link: '/admin', id: 4 }
 ];
 // const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
 
