@@ -21,7 +21,8 @@ const pages = [
   { name: 'PRODUCTS', link: '/products', id: 1 },
   { name: 'ABOUT US', link: '/aboutus', id: 2 },
   { name: 'CONTACTS', link: '*', id: 3 },
-  { name: 'ADMIN PANEL', link: '/admin', id: 4 }
+
+
 ];
 // const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
 
@@ -33,7 +34,7 @@ const Navbar = () => {
     handleLogout,
     user: { email },
   } = useAuth();
-  console.log(email);
+  
 
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
@@ -101,6 +102,15 @@ const Navbar = () => {
                   </Link>
                 </MenuItem>
               ))}
+               {/* ADMIN PANEL */}
+            {email == ADMIN ? (
+              <MenuItem>
+              <Link to="/admin">
+              <Typography textAlign="center">ADMIN PANNEL</Typography>
+              </Link>
+              </MenuItem>
+            ) : null}
+            {/* ADMIN PANEL */}
             </Menu>
           </Box>
           <Link to="/">
@@ -140,7 +150,7 @@ const Navbar = () => {
 
           <Box sx={{ flexGrow: 0 }}>
             {email ? (
-              <Button variant="outlined" color="error"
+              <Button id='button' variant="outlined" color="error"
                 sx={{ my: 2, display: 'block' }}
                 onClick={handleLogout}
               >
@@ -150,7 +160,7 @@ const Navbar = () => {
 
             {email ? null : (
               <Link to="/auth">
-                <Button variant="outlined" color="error"
+                <Button id='button' variant="outlined" color="error"
                   sx={{ my: 2, display: 'block' }}
                   onClick={handleLogout}
                 >
