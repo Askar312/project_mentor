@@ -14,6 +14,8 @@ import MenuItem from '@mui/material/MenuItem';
 import { Link } from 'react-router-dom';
 import { useAuth } from '../../contexts/AuthContext';
 import { ADMIN } from '../../helpers/consts';
+import './Navbar.css'
+import Logo from '../../assets/images/NOMAD.svg'
 
 const pages = [
   { name: 'PRODUCTS', link: '/products', id: 1 },
@@ -30,6 +32,8 @@ const Navbar = () => {
     handleLogout,
     user: { email },
   } = useAuth();
+  console.log(email);
+
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
   };
@@ -46,7 +50,7 @@ const Navbar = () => {
   };
 
   return (
-    <AppBar position="static">
+    <AppBar id='navbar_color' position="static">
       <Container maxWidth="xl">
         <Toolbar disableGutters>
           <Link to="/">
@@ -54,13 +58,13 @@ const Navbar = () => {
               variant="h6"
               noWrap
               component="div"
-              sx={{ mr: 2, display: { xs: 'none', md: 'flex' } }}
+              sx={{ mr: 2, display: { xs: 'none', md: 'flex',} }}
             >
-              HOME
+            <img src="https://www.nomadsland.ch/sites/default/files/icons/nomadspirit.svg" alt="" /> <span><img id='logo' src={Logo} alt="" /></span>
             </Typography>
           </Link>
 
-          <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
+          <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none', } }}>
             <IconButton
               size="large"
               aria-label="account of current user"
@@ -100,16 +104,16 @@ const Navbar = () => {
           </Box>
           <Link to="/">
             <Typography
+            
               variant="h6"
               noWrap
               component="div"
               sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}
             >
-              HOME
+              <img className='logo' src={Logo}alt="" />
             </Typography>
           </Link>
-
-          <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
+          <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex', justifyContent:"center" } }}>
             {pages.map((page) => (
               <Link to={page.link}>
                 <Button
@@ -121,34 +125,34 @@ const Navbar = () => {
                 </Button>
               </Link>
             ))}
-            {/* ==================ADMIN PANEL =================*/}
-            {email === ADMIN ? (
+
+            {/* ADMIN PANEL */}
+            {email == ADMIN ? (
               <Link to="/admin">
-                <Button
-                  onClick={handleCloseNavMenu}
-                  sx={{ my: 2, color: 'white', display: 'block' }}
-                >
+                <Button sx={{ my: 2, color: 'white', display: 'block' }}>
                   ADMIN PANEL
                 </Button>
               </Link>
             ) : null}
+            {/* ADMIN PANEL */}
           </Box>
 
           <Box sx={{ flexGrow: 0 }}>
             {email ? (
-              // <Link to="/auth">
-              <Button
-                sx={{ my: 2, color: 'white', display: 'block' }}
+              <Button variant="outlined" color="error"
+                sx={{ my: 2, display: 'block' }}
                 onClick={handleLogout}
               >
                 Logout
               </Button>
-            ) : // </Link>
-            null}
+            ) : null}
 
             {email ? null : (
               <Link to="/auth">
-                <Button sx={{ my: 2, color: 'white', display: 'block' }}>
+                <Button variant="outlined" color="error"
+                  sx={{ my: 2, display: 'block' }}
+                  onClick={handleLogout}
+                >
                   Login
                 </Button>
               </Link>
